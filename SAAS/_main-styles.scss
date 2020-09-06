@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+}
+
+.centering {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+@mixin for-size($range) {
+  $phone-upper-boundary: 600px;
+  $tablet-portrait-upper-boundary: 900px;
+  $tablet-landscape-upper-boundary: 1200px;
+  $desktop-upper-boundary: 1800px;
+
+  @if $range == phone-only {
+    @media (max-width: #{$phone-upper-boundary - 1}) {
+      @content;
+    }
+  } @else if $range == tablet-portrait-up {
+    @media (min-width: $phone-upper-boundary) {
+      @content;
+    }
+  } @else if $range == tablet-landscape-up {
+    @media (min-width: $tablet-portrait-upper-boundary) {
+      @content;
+    }
+  } @else if $range == desktop-up {
+    @media (min-width: $tablet-landscape-upper-boundary) {
+      @content;
+    }
+  } @else if $range == big-desktop-up {
+    @media (min-width: $desktop-upper-boundary) {
+      @content;
+    }
+  }
+}
+
+@mixin underlineHover($bc-color) {
+  $duration: 0.2s;
+  $distance: 8px;
+  $easeOutBack: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  position: relative;
+  text-decoration: none;
+  padding-bottom: 8px;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: $bc-color;
+  }
+  &:before {
+    opacity: 0;
+    transform: translateY(-$distance);
+    transition: transform 0s $easeOutBack, opacity 0s;
+  }
+  &:after {
+    opacity: 0;
+    transform: translateY($distance/2);
+    transition: transform $duration $easeOutBack, opacity $duration;
+  }
+  &:hover,
+  &:focus {
+    &:before,
+    &:after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    &:before {
+      transition: transform $duration $easeOutBack, opacity $duration;
+    }
+    &:after {
+      transition: transform 0s $duration $easeOutBack, opacity 0s $duration;
+    }
+  }
+}
