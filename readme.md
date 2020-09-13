@@ -9,4 +9,4 @@
 ## Title 1.2 (H2)
 
 [Optus Whale Song](http://www.optuswhalesong.com.au)
-![WhalePhoto](A:\FE Advanced\ampli-adv-fe-11-git_2/загружено.jpg)
+![WhalePhoto](https://happycoin.club/wp-content/uploads/2017/07/whales-1.jpg)
